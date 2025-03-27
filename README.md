@@ -92,10 +92,10 @@ ___
 
 ```
 fake 라이브러릴 전에 더미 데이터를 만들기 위해 다양한 시도를 해봤다.
-1. **[Mockaroo](https://mockaroo.com/)**  시도 
-다양한 타입들의 dummy data를 랜덤으로 생성할 수 있다.
-이렇게 만든 JSON 데이터를 저장한 뒤 JsonPath로 추출하는 작업을 시도 
-```java
+1. **[Mockaroo](https://mockaroo.com/)**  시도
+   - 다양한 타입들의 dummy data를 랜덤으로 생성할 수 있다.
+   - 이렇게 만든 JSON 데이터를 저장한 뒤 JsonPath로 추출하는 작업을 시도 
+    ```java
     @Test
     void setUp() throws IOException {
         ClassPathResource jsonData = new ClassPathResource("department.json");
@@ -103,18 +103,18 @@ fake 라이브러릴 전에 더미 데이터를 만들기 위해 다양한 시�
         // io 작업이니 inputstream으로 읽어야 함
         DocumentContext parsedData = JsonPath.parse(jsonData.getInputStream());
         List<DepartmentCreateRequest> jsonDtoList = parsedData.json();  // 알아서 매핑해줌
-```
-- 한계 : JsonPath.parse()로 파싱할 경우 기본적으로 JSON 객체들을 LinkedHashMap으로 반환
-- 해결방법 : objcetMapper 사용 or jsonPath 문법 사용 or new TypeRef
+    ```
+    - 한계 : JsonPath.parse()로 파싱할 경우 기본적으로 JSON 객체들을 LinkedHashMap으로 반환
+    - 해결방법 : objcetMapper 사용 or jsonPath 문법 사용 or new TypeRef
 
     > 이런 방법들 다 사용해봤는데 괜히 복잡해져서 다른 방법을 알아보다가 Fake라이브러리 발견
 
 
 2. ⭐**Fake 라이브러리 사용**
-- 다양한 타입의 랜덤 데이터를 만들 수 있다
-- 자바 기반이다보니 편리
-- 앞으로 이거를 쓸 것 같다.
-- setting_entity_save_and_containing_name 말고도 다른 필드에 공통 word를 포함하는 로직도 있다.
+    - 다양한 타입의 랜덤 데이터를 만들 수 있다
+    - 자바 기반이다보니 편리
+    - 앞으로 이거를 쓸 것 같다.
+    - setting_entity_save_and_containing_name 말고도 다른 필드에 공통 word를 포함하는 로직도 있다.
 
 
 
